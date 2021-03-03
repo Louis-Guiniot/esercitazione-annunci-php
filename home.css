@@ -3,11 +3,7 @@
     margin: auto;
     margin-top: 50px;
     padding: 1%;
-    border: 1px rgb(205, 212, 219) solid;
+    border: 1px white solid;
+    background-color: rgb(51, 58, 65);
     border-radius: 5px;
-}
-
-#tab {
-    width: 60%;
-    color: blue;
 }
