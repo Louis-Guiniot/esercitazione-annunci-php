@@ -26,65 +26,65 @@
 
     <div class="box">
 
-        
-
         <form action="upload.php" method="post" enctype="multipart/form-data">
 
         <div class="container">
-        <div class="row">    
-            <div class="col">
+            <div class="row">    
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <a href="logout.php"><button class="btn btn-dark">logout</button></a>
+                    </div>                
+                </div>
+                <div class="col-10">
                 <div class="input-group mb-3">
-                    <a href="logout.php"><button class="btn btn-dark">logout</button></a>
-                </div>                
-            </div>
-            <div class="col-10">
-            <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="insert word to search" name="word">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="insert word to search" name="word" autocomplete="off">
 
-                    </div>
+                        </div>
+                </div>
             </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileUrl" aria-describedby="inputGroupFileAddon01" name="fileUrl">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Prezzo</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="prezzo" aria-label="Recipient's username" aria-describedby="button-addon2" name="prezzo" autocomplete="off">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Descrizione</span>
+                            </div>
+                            <textarea type="text" class="form-control" placeholder="prezzo" aria-label="Recipient's username" aria-describedby="button-addon2" name="descrizione" autocomplete="off"></textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <button type="submit" class="form-control">inserisci</button>
+                </div>
+
         </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileUrl" aria-describedby="inputGroupFileAddon01" name="fileUrl">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Prezzo</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="prezzo" aria-label="Recipient's username" aria-describedby="button-addon2" name="prezzo">
-
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Descrizione</span>
-                        </div>
-                        <textarea type="text" class="form-control" placeholder="prezzo" aria-label="Recipient's username" aria-describedby="button-addon2" name="descrizione"></textarea>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="input-group mb-3">
-                <button type="submit" class="form-control">inserisci</button>
-            </div>
-        </div>
-        
         </form>
+        
+    </div>
 
 
             <?php
@@ -117,8 +117,6 @@
             $conn->close();
 ?>
 
-
-    </div>
 </body>
 
 </html>
