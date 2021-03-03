@@ -11,6 +11,8 @@
 
 <html>
 
+
+
 <head>
     <title>Home</title>
 
@@ -32,14 +34,16 @@
                         </div>                
                     </div>
                     <div class="col-10">
-                    <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
+                    <form action="home.php" method="post">
+                        <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="insert word to search" name="termine" autocomplete="off">
+                                    <button class="btn btn-dark" type="submit">Button</button>
                                 </div>
-                                <input type="text" class="form-control" placeholder="insert word to search" name="word" autocomplete="off">
-
-                            </div>
-                    </div>
+                        </div>
+                    </form>
                 </div>
 
             <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -86,45 +90,93 @@
     </div>
 
     <?php
+            if(!isset($_POST['termine'])){
 
-            require_once('config.php');
-           
-            $strSelect = "SELECT * FROM annuncio;";
-            $resultSelect=$conn->query($strSelect);
+                require_once('config.php');
+               
+                $strSelect = "SELECT * FROM annuncio;";
+                $resultSelect=$conn->query($strSelect);
+    
+                while($row=$resultSelect->fetch_assoc()){
+    
+                     echo "
+                     <div class=card mb-3 style='border:1px white solid; color:white; width:60%; padding:1%; margin:auto; margin-top:20px; background-color: rgb(51, 58, 65);'>
+                     <div class=row>
+                         <div class=col-md-3>
+                             <img src=uploads/".$row['immagine']." class=card-img-top style='height:30vh; border-radius:0; border:1px white solid'>
+                         </div>
+                         <div class=col-md-9>
+                             <div class=card-body>
+                                 <table class=table style='width:100%; color:white;'>
+                                     <tr style='background-color:white; color:rgb(51, 58, 65);'>
+                                         <td>ID</td>
+                                         <td>".$row['idannuncio']."</td>
+                                     </tr>
+                                     <tr>
+                                     <td>PREZZO</td>
+                                         <td>".$row['prezzo']."</td>
+                                     </tr>
+                                     <tr>
+                                     <td>DESCRIZIONE</td>
+                                         <td>".$row['descrizione']."</td>
+                                     </tr>
+                                 </table>
+                             </div>
+                         </div>
+                     </div>        
+                 </div>
+                    ";
+      
+            
+                }
+    
+                $conn->close();
+            }else{
+                
+                    require_once('config.php');
+                    
+                    if (!isset($_SESSION['user'])) {
+                        header("Location:login.php");
+                    }else{
+                        if (isset($_POST['termine'])) {
+                            $query="SELECT * FROM `vuln`.`annuncio` WHERE (idannuncio LIKE '%".$_POST['termine']."%' OR prezzo LIKE '%".$_POST['termine']."%' OR immagine LIKE '%".$_POST['termine']."%' OR descrizione LIKE '%".$_POST['termine']."%')";
+                    
+                            $resultSelect=$conn->query($query);
 
-            while($row=$resultSelect->fetch_assoc()){
+                            while ($row=$resultSelect->fetch_assoc()) {
+                                echo "
+                                    <div class=card mb-3 style='border:1px white solid; color:white; width:60%; padding:1%; margin:auto; margin-top:20px; background-color: rgb(51, 58, 65);'>
+                                        <div class=row>
+                                            <div class=col-md-3>
+                                                <img src=uploads/".$row['immagine']." class=card-img-top style='height:30vh; border-radius:0; border:1px white solid'>
+                                            </div>
+                                            <div class=col-md-9>
+                                                <div class=card-body>
+                                                    <table class=table style='width:100%; color:white;'>
+                                                        <tr style='background-color:white; color:rgb(51, 58, 65);'>
+                                                            <td>ID</td>
+                                                            <td>".$row['idannuncio']."</td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>PREZZO</td>
+                                                            <td>".$row['prezzo']."</td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>DESCRIZIONE</td>
+                                                            <td>".$row['descrizione']."</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>        
+                                    </div>
+                                    ";
+                            }
+                        }
+                    }
 
-                 echo "
-                <div class=card mb-3 style='border:1px white solid; color:white; width:60%; padding:1%; margin:auto; margin-top:20px; background-color: rgb(51, 58, 65);'>
-                    <div class=row>
-                        <div class=col-md-3>
-                            <img src=uploads/".$row['immagine']." class=card-img-top style='height:30vh; border-radius:0; border:1px white solid'>
-                        </div>
-                        <div class=col-md-9>
-                            <div class=card-body>
-                                <table class=table style='width:100%; color:white;'>
-                                    <tr style='background-color:white; color:rgb(51, 58, 65);'>
-                                        <td>ID</td>
-                                        <td>".$row['idannuncio']."</td>
-                                    </tr>
-                                    <tr>
-                                    <td>PREZZO</td>
-                                        <td>".$row['prezzo']."</td>
-                                    </tr>
-                                    <tr>
-                                    <td>DESCRIZIONE</td>
-                                        <td>".$row['descrizione']."</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>        
-                </div>
-                ";
             }
-
-            $conn->close();
-?>
+    ?>
 
 </body>
 </html>
