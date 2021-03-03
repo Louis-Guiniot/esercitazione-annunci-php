@@ -26,9 +26,28 @@
 
     <div class="box">
 
-        <a href="logout.php"><button class="btn btn-dark">logout</button></a>
+        
 
         <form action="upload.php" method="post" enctype="multipart/form-data">
+
+        <div class="container">
+        <div class="row">    
+            <div class="col">
+                <div class="input-group mb-3">
+                    <a href="logout.php"><button class="btn btn-dark">logout</button></a>
+                </div>                
+            </div>
+            <div class="col-10">
+            <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="insert word to search" name="word">
+
+                    </div>
+            </div>
+        </div>
+
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -63,7 +82,11 @@
             <div class="input-group mb-3">
                 <button type="submit" class="form-control">inserisci</button>
             </div>
+        </div>
+        
         </form>
+
+
             <?php
 
             require_once('config.php');
