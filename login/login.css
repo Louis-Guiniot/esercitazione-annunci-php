@@ -1,0 +1,15 @@
+.box {
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    padding: 1%;
+    border-radius: 5px;
+}
+
+form {
+    width: 100%;
+}
+
+#basic-addon1 {
+    border: 1px rgb(51, 58, 65) solid;
+}
