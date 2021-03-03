@@ -1,28 +1,14 @@
 <?php
-require_once('config.php');
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location:login.php");
-}else{
- if(isset($_POST['prezzo'])){
-     //INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES ('2', '123', 'footoo', 'desc', '1');
-     
-     $strInsert = "INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES
-     ( DEFAULT,
-       '" . $_POST['prezzo'] . "',
-       '" . $_POST['fileUrl'] . "',
-       '" . $_POST['descrizione'] . "',
-       '" . $_SESSION['user'] . "'
-     )";
-     
-     echo $strInsert;
-     $result = $conn->query($strInsert);
-     $conn->close();
 
- }   
-}
-
+            require_once('config.php');
+           
+            session_start();
+            if (!isset($_SESSION['user'])) {
+                header("Location:login.php");
+            }
+           
 ?>
+
 <html>
 
 <head>
@@ -38,13 +24,13 @@ if (!isset($_SESSION['user'])) {
 <body>
 
     <div class="box">
-        <form action="home.php" method="post">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="fileUrl">
+                    <input type="file" class="custom-file-input" id="fileUrl" aria-describedby="inputGroupFileAddon01" name="fileUrl">
                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                 </div>
             </div>
@@ -74,12 +60,10 @@ if (!isset($_SESSION['user'])) {
                 <button type="submit" class="form-control">inserisci</button>
             </div>
         </form>
-
-
-        <?php
+            <?php
 
             require_once('config.php');
-
+           
             $strSelect = "SELECT * FROM annuncio;";
             $resultSelect=$conn->query($strSelect);
 
@@ -98,7 +82,8 @@ if (!isset($_SESSION['user'])) {
             }
             echo "</table><br/><br/>";
             $conn->close();
-        ?>
+?>
+
 
     </div>
 </body>
