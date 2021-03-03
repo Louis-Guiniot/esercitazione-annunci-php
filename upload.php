@@ -58,6 +58,8 @@ if (!isset($_SESSION['user'])) {
     // Update database
     
     //mysql_close();    
+    $prezzo = str_replace("'", "", $prezzo);
+    $descrizione = str_replace("'", "", $descrizione);
     echo $prezzo."<br>".$uploaded_name."<br>".$descrizione;
 
      $strInsert = "INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES
