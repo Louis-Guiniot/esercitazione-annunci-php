@@ -3,20 +3,24 @@ require_once('config.php');
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location:login.php");
+}else{
+ if(isset($_POST['prezzo'])){
+     //INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES ('2', '123', 'footoo', 'desc', '1');
+     
+     $strInsert = "INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES
+     ( DEFAULT,
+       '" . $_POST['prezzo'] . "',
+       '" . $_POST['fileUrl'] . "',
+       '" . $_POST['descrizione'] . "',
+       '" . $_SESSION['user'] . "'
+     )";
+     
+     echo $strInsert;
+     $result = $conn->query($strInsert);
+     $conn->close();
+
+ }   
 }
-//INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES ('2', '123', 'footoo', 'desc', '1');
-
-$strInsert = "INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES
-( DEFAULT,
-  '" . $_POST['prezzo'] . "',
-  '" . $_POST['fileUrl'] . "',
-  '" . $_POST['descrizione'] . "',
-  '" . $_SESSION['user'] . "'
-)";
-
-echo $strInsert;
-$result = $conn->query($strInsert);
-$conn->close();
 
 ?>
 <html>
