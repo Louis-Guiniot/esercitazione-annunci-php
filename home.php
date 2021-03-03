@@ -33,13 +33,7 @@
                     </div>                
                 </div>
                 <div class="col-10">
-                <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="insert word to search" name="word" autocomplete="off">
-
-                        </div>
+               
                 </div>
             </div>
 
@@ -84,10 +78,18 @@
 
         </form>
 
-        <form action="cerca.php" method="post">
+        <form action="home.php" method="post">
 
-            termine: <input type="text" name="termine">
-            <button type="submit">cerca</button>
+        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Search</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="insert word to search" name="termine" autocomplete="off">
+
+                        </div>
+            <div class="input-group mb-3">
+            <button class="form-control" type="submit">cerca</button>
+            </div>
         </form>
 
     </div>
@@ -95,29 +97,66 @@
 
         <?php
 
-            require_once('config.php');
-           
-            $strSelect = "SELECT * FROM annuncio;";
-            $resultSelect=$conn->query($strSelect);
 
-            while($row=$resultSelect->fetch_assoc()){
+            if(!isset($_POST['termine'])){
 
-                 echo "
-                <div class=card style='background-color:#FF9AA2; color:white; width:60%; margin:auto; margin-top:20px;'>
-                    <div class=card-body>
-                        <h5 class=card-title>".$row['idannuncio']."</h5>
-                        <p class=card-text>Prezzo: ".$row['prezzo']."</p>
-                        <p class=card-text>Immagine: ".$row['immagine']."</p>
-                        <p class=card-text>Descrizione: ".$row['descrizione']."</p>
-
+                require_once('config.php');
+               
+                $strSelect = "SELECT * FROM annuncio;";
+                $resultSelect=$conn->query($strSelect);
+    
+                while($row=$resultSelect->fetch_assoc()){
+    
+                     echo "
+                    <div class=card style='background-color:#FF9AA2; color:white; width:60%; margin:auto; margin-top:20px;'>
+                        <div class=card-body>
+                            <h5 class=card-title>".$row['idannuncio']."</h5>
+                            <p class=card-text>Prezzo: ".$row['prezzo']."</p>
+                            <p class=card-text>Immagine: ".$row['immagine']."</p>
+                            <p class=card-text>Descrizione: ".$row['descrizione']."</p>
+    
+                        </div>
                     </div>
-                </div>
-                ";
-  
-        
-            }
+                    ";
+      
+            
+                }
+    
+                $conn->close();
+            }else{
+                
+                    require_once('config.php');
+                    
+                    if (!isset($_SESSION['user'])) {
+                        header("Location:login.php");
+                    }else{
+                    if(isset($_POST['termine'])){
 
-            $conn->close();
+
+                        $query="SELECT * FROM `vuln`.`annuncio` WHERE (idannuncio LIKE '%".$_POST['termine']."%' OR prezzo LIKE '%".$_POST['termine']."%' OR immagine LIKE '%".$_POST['termine']."%' OR descrizione LIKE '%".$_POST['termine']."%')";
+                    
+                        $resultSelect=$conn->query($query);
+
+                                while($row=$resultSelect->fetch_assoc()){
+
+                                    echo "
+                                    <div class=card style='background-color:#FF9AA2; color:white; width:60%; margin:auto; margin-top:20px;'>
+                                        <div class=card-body>
+                                            <h5 class=card-title>".$row['idannuncio']."</h5>
+                                            <p class=card-text>Prezzo: ".$row['prezzo'].".</p>
+                                            <p class=card-text>Immagine: ".$row['immagine'].".</p>
+                                            <p class=card-text>Descrizione: ".$row['descrizione'].".</p>
+
+                                        </div>
+                                    </div>
+                                    ";
+                    
+                            
+                                }
+                        }
+                    }
+
+            }
         ?>
 
 </body>
