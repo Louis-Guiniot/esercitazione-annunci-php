@@ -84,10 +84,16 @@
 
         </form>
 
+        <form action="cerca.php" method="post">
+
+            termine: <input type="text" name="termine">
+            <button type="submit">cerca</button>
+        </form>
+
     </div>
 
 
-            <?php
+        <?php
 
             require_once('config.php');
            
@@ -97,12 +103,12 @@
             while($row=$resultSelect->fetch_assoc()){
 
                  echo "
-                <div class=card style='background-color:red; color:white; width:60%; margin:auto; margin-top:20px;'>
+                <div class=card style='background-color:#FF9AA2; color:white; width:60%; margin:auto; margin-top:20px;'>
                     <div class=card-body>
                         <h5 class=card-title>".$row['idannuncio']."</h5>
-                        <p class=card-text>Prezzo: ".$row['prezzo'].".</p>
-                        <p class=card-text>Immagine: ".$row['immagine'].".</p>
-                        <p class=card-text>Descrizione: ".$row['descrizione'].".</p>
+                        <p class=card-text>Prezzo: ".$row['prezzo']."</p>
+                        <p class=card-text>Immagine: ".$row['immagine']."</p>
+                        <p class=card-text>Descrizione: ".$row['descrizione']."</p>
 
                     </div>
                 </div>
@@ -112,7 +118,7 @@
             }
 
             $conn->close();
-?>
+        ?>
 
 </body>
 

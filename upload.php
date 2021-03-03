@@ -48,13 +48,14 @@ if (!isset($_SESSION['user'])) {
     $descrizione = trim( $_POST[ 'descrizione' ] );
 
     // Sanitize message input
-    $message = strip_tags( addslashes( $prezzo ) );
+    //$message = strip_tags( addslashes( $prezzo ) );
     //$prezzo = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"],  $prezzo ) : ((trigger_error("[MySQLConverterToo] HACKERINO!!!!", E_USER_ERROR)) ? "" : ""));
     //$prezzo = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"],  $prezzo ) : ((trigger_error("[MySQLConverterToo] HACKERINO!!!!", E_USER_ERROR)) ? "" : ""));
     $prezzo = htmlspecialchars( $prezzo );
+    $descrizione = htmlspecialchars( $descrizione );
 
     // Sanitize descrizione input
-    $descrizione = preg_replace( '/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i', '', $descrizione );
+   // $descrizione = preg_replace( '/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i', '', $descrizione );
     //$descrizione = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"],  $descrizione ) : ((trigger_error("[MySQLConverterToo] LMAO HACKER", E_USER_ERROR)) ? "" : ""));
 
     // Update database
