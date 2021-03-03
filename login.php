@@ -18,7 +18,8 @@ if(isset($_POST['username'])){
        $row=$result->fetch_assoc();
       // echo "username: ".$row['username']."<br>";
        session_start();
-       $_SESSION['user']=$user;
+       $_SESSION['user']=$row['iduser'];
+
        $conn->close();
        echo "codice passato";
        header("Location:home.php");
