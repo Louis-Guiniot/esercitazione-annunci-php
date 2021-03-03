@@ -1,47 +1,51 @@
 <?php
-if(isset($_POST['username'])){
-   $msg="";
-   require('config.php');
-
-
-   $user =($_POST['username']);
-   $psw=($_POST['password']);
-   $user = str_replace("'", "", $user);
-   $psw = str_replace("'", "", $psw);
-
-   $strSelect="SELECT * FROM user WHERE username='".$user."' AND password='".$psw."'LIMIT 1;";
-
-   $result=$conn->query($strSelect);
-
-   if($result->num_rows==1)
-   {
-       $row=$result->fetch_assoc();
-      // echo "username: ".$row['username']."<br>";
-       session_start();
-       $_SESSION['user']=$row['iduser'];
-
-       $conn->close();
-       echo "codice passato";
-       header("Location:home.php");
-   }
-   else{
-       session_start();
-       $_SESSION['conta']=$_SESSION['conta']+1;
-
-       if($_SESSION['conta']==3){
-         session_destroy();
-         header("Location:hack.php");
-
-       }
-
-       $msg="Utente non abilitato";
-       echo $msg;
-   }
-}
 
 session_start();
+
 if (isset($_SESSION['user'])) {
     header("Location:home.php");
+
+}else{
+
+    if(isset($_POST['username'])){
+
+        require('config.php');
+        $msg="";
+
+        $user =($_POST['username']);
+        $psw=($_POST['password']);
+        $user = str_replace("'", "", $user);
+        $psw = str_replace("'", "", $psw);
+     
+        $strSelect="SELECT * FROM user WHERE username='".$user."' AND password='".$psw."'LIMIT 1;";
+     
+        $result=$conn->query($strSelect);
+     
+        if($result->num_rows==1)
+        {
+            $row=$result->fetch_assoc();
+           // echo "username: ".$row['username']."<br>";
+            session_start();
+            $_SESSION['user']=$row['iduser'];
+     
+            $conn->close();
+            echo "codice passato";
+            header("Location:home.php");
+        }
+        else{
+            session_start();
+            $_SESSION['conta']=$_SESSION['conta']+1;
+     
+            if($_SESSION['conta']==3){
+              session_destroy();
+              header("Location:hack.php");
+     
+            }
+     
+            $msg="Utente non abilitato";
+            echo $msg;
+        }
+     }
 }
 
 ?>  
