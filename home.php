@@ -26,10 +26,7 @@
 
     <div class="box">
 
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-
-        <div class="container">
-            <div class="row">    
+    <div class="row">    
                 <div class="col">
                     <div class="input-group mb-3">
                         <a href="logout.php"><button class="btn btn-dark">logout</button></a>
@@ -46,6 +43,10 @@
                 </div>
             </div>
 
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+
+        
+        
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -81,9 +82,8 @@
                     <button type="submit" class="form-control">inserisci</button>
                 </div>
 
-        </div>
         </form>
-        
+
     </div>
 
 
@@ -94,26 +94,23 @@
             $strSelect = "SELECT * FROM annuncio;";
             $resultSelect=$conn->query($strSelect);
 
-            echo "<table class=table>";
-            echo "<tr>";
-            echo "<td>ID</td>";
-            echo "<td>PREZZO</td>";
-            echo "<td>FILE URL</td>";
-            echo "<td>DESCRIZIONE</td>";
-            echo "</tr>";
-
             while($row=$resultSelect->fetch_assoc()){
 
-                echo "<tr>";
-                echo "<td>".$row['idannuncio']."</td>";
-                echo "<td>".$row['prezzo']."</td>";
-                echo "<td>".$row['immagine']."</td>";
-                echo "<td>".$row['descrizione']."</td>";
-                echo "</tr>";
+                 echo "
+                <div class=card style='background-color:red; color:white; width:60%; margin:auto; margin-top:20px;'>
+                    <div class=card-body>
+                        <h5 class=card-title>".$row['idannuncio']."</h5>
+                        <p class=card-text>Prezzo: ".$row['prezzo'].".</p>
+                        <p class=card-text>Immagine: ".$row['immagine'].".</p>
+                        <p class=card-text>Descrizione: ".$row['descrizione'].".</p>
+
+                    </div>
+                </div>
+                ";
   
         
             }
-            echo "</table><br/><br/>";
+
             $conn->close();
 ?>
 
