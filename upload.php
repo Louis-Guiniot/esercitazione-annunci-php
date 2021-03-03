@@ -32,8 +32,10 @@ if (!isset($_SESSION['user'])) {
         }
         else {
             // Yes!
-            echo "<pre>{$target_path} succesfully uploaded!</pre>";
-            echo "<a href=home.php>turna ndret</a>";
+            // echo "<pre>{$target_path} succesfully uploaded!</pre>";
+            // echo "<a href=home.php>turna ndret</a>";
+
+            header("Location:home.php");
         }
     }
     else {
