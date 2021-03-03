@@ -4,14 +4,17 @@ session_start();
 if (!isset($_SESSION['user'])) {
     header("Location:login.php");
 }
+//INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES ('2', '123', 'footoo', 'desc', '1');
 
-$strInsert = "INSERT INTO annuncio VALUES
+$strInsert = "INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES
 ( DEFAULT,
   '" . $_POST['prezzo'] . "',
   '" . $_POST['fileUrl'] . "',
-  '" . $_POST['descrizione'] . "'
+  '" . $_POST['descrizione'] . "',
+  '" . $_SESSION['user'] . "'
 )";
 
+echo $strInsert;
 $result = $conn->query($strInsert);
 $conn->close();
 
