@@ -1,3 +1,5 @@
+
+
 <?php
 require_once('config.php');
 session_start();
@@ -39,11 +41,30 @@ if (!isset($_SESSION['user'])) {
         echo '<pre>Your image was not uploaded. We can only accept JPEG or PNG images.</pre>';
     }
 
+    // Get input
+    $prezzo = trim( $_POST[ 'prezzo' ] );
+    $descrizione = trim( $_POST[ 'descrizione' ] );
+
+    // Sanitize message input
+    $message = strip_tags( addslashes( $prezzo ) );
+    $prezzo = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"],  $prezzo ) : ((trigger_error("[MySQLConverterToo] HACKERINO!!!!", E_USER_ERROR)) ? "" : ""));
+    //$prezzo = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"],  $prezzo ) : ((trigger_error("[MySQLConverterToo] HACKERINO!!!!", E_USER_ERROR)) ? "" : ""));
+    $prezzo = htmlspecialchars( $prezzo );
+
+    // Sanitize descrizione input
+    $descrizione = preg_replace( '/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i', '', $descrizione );
+    $descrizione = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"],  $descrizione ) : ((trigger_error("[MySQLConverterToo] LMAO HACKER", E_USER_ERROR)) ? "" : ""));
+
+    // Update database
+    
+    //mysql_close();    
+
+
      $strInsert = "INSERT INTO `vuln`.`annuncio` (`idannuncio`, `prezzo`, `immagine`, `descrizione`, `user_iduser`) VALUES
      ( DEFAULT,
-       '" . $_POST['prezzo'] . "',
+       '" . $prezzo . "',
        '" . $uploaded_name . "',
-       '" . $_POST['descrizione'] . "',
+       '" . $descrizione . "',
        '" . $_SESSION['user'] . "'
      )";
 
